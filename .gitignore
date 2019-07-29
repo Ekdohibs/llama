@@ -1,0 +1,11 @@
+*.cmo
+*.cmi
+*.cmx
+*.cmt
+*.cmti
+*.cma
+*.cmxa
+*.annot
+*.o
+llamac
+.depend
