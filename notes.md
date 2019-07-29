@@ -20,7 +20,7 @@
 f(a)
 f(a, b)
 f(?,b) = f : a |-> f(a,b)
-f(a,.) = f : b |-> f(a,b)
+f(a,?) = f : b |-> f(a,b)
 f((a,b))
 
 					(=> notion de nb d'arguments d'une fonction)
@@ -69,12 +69,12 @@ if x {abc} else {def} 			(else optionnel si pas de 2e bloc)
 
 ## match
 
-match truc with
+match truc {
 | abc => truc_bis
 | def => truc_ter
 | exception Fsd(v) =>
 | effect Iter(v) k => 			(la continuation est après)
-
+}
 
 ## créer un effet
 
