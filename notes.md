@@ -12,6 +12,10 @@
 
 # Syntaxe
 
+## divers
+
+- majuscules obligatoires pour les constructeurs
+
 ## application de fonctions
 f(a)
 f(a, b)
@@ -68,13 +72,14 @@ if x {abc} else {def} 			(else optionnel si pas de 2e bloc)
 match truc with
 | abc => truc_bis
 | def => truc_ter
-| exception fsd(v) =>
+| exception Fsd(v) =>
 | effect Iter(v) k => 			(la continuation est après)
 
 
 ## créer un effet
 
-perform nom_effet(arg)			(argument optionnel)
+perform Nom_effet(arg)			(argument optionnel)
+
 
 ## listes, tableaux, tuples
 
@@ -106,8 +111,17 @@ a -> b -> c				(une fonction qui renvoie une fonction)
 (a,b) -> c				(une fonction à plusieurs arguments)
 (a*b*c) -> c				(une fonction qui prend un tuple en argument)
 
-## types construits
+## types construits 
 
+### types inductifs
 
+type machin = truc | truc2 | Constructeur of truc3
+
+### record
+
+type machin = {champ1 : type1 ; ...}
+
+machin.champ1
+machin.champ2 = truc
 
 
