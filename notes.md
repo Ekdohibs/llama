@@ -45,7 +45,7 @@ for x in truc { machin(x) ; machin_bis(x)}
 def rec loop(z) { match z with
   | () => ()
   | effect Iter(v) k => machin(v); loop(k())
-};
+}
 loop(truc)
 
 ou
