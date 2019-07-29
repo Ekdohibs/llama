@@ -119,7 +119,7 @@ type machin = truc | truc2 | Constructeur of truc3
 
 ### record
 
-type machin = {champ1 : type1 ; ...}
+type machin = {|champ1 : type1 ; ...|}
 
 machin.champ1
 machin.champ2 = truc
