@@ -83,7 +83,7 @@ expr:
     | e = simple_expr; LPAREN;
           l = separated_list(COMMA, function_argument); RPAREN
        { ECall (e, l) }
-    | RETURN; e = expr { EReturn e }
+    | RETURN; e = simple_expr { EReturn e }
     | BREAK { EBreak }
     | CONTINUE { EContinue }
     | LBRACK; l = separated_list(COMMA, simple_expr); RBRACK { EList l }
@@ -93,13 +93,14 @@ expr:
 
 %inline expr_desc:
     | e = simple_expr_desc { e }
-    | VAL; r = rec_flag; x = located(LIDENT); EQ; e1 = expr; SEMI; e2 = expr
+    | VAL; r = rec_flag; x = located(LIDENT); EQ;
+      e1 = simple_expr; SEMI; e2 = expr
        { EVal (x, r, e1, e2) }
     | DEF; r = rec_flag; x = located(LIDENT);
       LPAREN; l = separated_list(COMMA, located(LIDENT)); RPAREN;
       LBRACE; e1 = expr; RBRACE; e2 = expr
        { EDef (x, r, l, e1, e2) }
-    | e1 = expr; SEMI; e2 = expr { ESequence (e1, e2) }
+    | e1 = simple_expr; SEMI; e2 = expr { ESequence (e1, e2) }
     | FOR; x = located(LIDENT); IN; e1 = expr; LBRACE; e2 = expr; RBRACE
        { EFor (x, e1, e2) }
     | WHILE; e1 = expr; LBRACE; e2 = expr; RBRACE { EWhile (e1, e2) }
