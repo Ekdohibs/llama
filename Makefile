@@ -10,7 +10,7 @@ OCAMLC=ocamlfind ocamlc -unsafe-string $(PACKAGES) $(INCLUDES)
 OCAMLOPT=ocamlfind ocamlopt -unsafe-string $(PACKAGES) $(INCLUDES)
 OCAMLDEP=ocamldep
 
-MENHIR=menhir
+MENHIR=menhir --infer --explain
 OCAMLLEX=ocamllex
 
 MLY=$(foreach d,$(DIRS),$(wildcard $(d)/*.mly))

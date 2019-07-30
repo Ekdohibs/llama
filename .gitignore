@@ -9,3 +9,7 @@
 *.o
 llamac
 .depend
+*.conflicts
+lexer.ml
+parser.ml
+parser.mli
