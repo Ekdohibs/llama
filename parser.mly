@@ -83,13 +83,16 @@ expr:
     | e = simple_expr; LPAREN;
           l = separated_list(COMMA, function_argument); RPAREN
        { ECall (e, l) }
-    | RETURN; e = simple_expr { EReturn e }
     | BREAK { EBreak }
     | CONTINUE { EContinue }
     | LBRACK; l = separated_list(COMMA, simple_expr); RBRACK { EList l }
     | LBRACKBAR; l = separated_list(COMMA, simple_expr); BARRBRACK { EArray l }
     | LPAREN; RPAREN { EUnit }
     | LPAREN; l = separated_list2(COMMA, simple_expr); RPAREN { ETuple l }
+    | IF; e1 = simple_expr; LBRACE; e2 = expr; RBRACE { EIf (e1, e2, None) }
+    | IF; e1 = simple_expr; LBRACE; e2 = expr; RBRACE;
+      ELSE; LBRACE; e3 = expr; RBRACE
+       { EIf (e1, e2, Some e3) }
 
 %inline expr_desc:
     | e = simple_expr_desc { e }
@@ -104,9 +107,7 @@ expr:
     | FOR; x = located(LIDENT); IN; e1 = expr; LBRACE; e2 = expr; RBRACE
        { EFor (x, e1, e2) }
     | WHILE; e1 = expr; LBRACE; e2 = expr; RBRACE { EWhile (e1, e2) }
-    | IF; e1 = expr; LBRACE; e2 = expr; RBRACE { EIf (e1, e2, None) }
-    | IF; e1 = expr; LBRACE; e2 = expr; RBRACE; ELSE; LBRACE; e3 = expr; RBRACE
-       { EIf (e1, e2, Some e3) }
+    | RETURN; e = simple_expr { EReturn e }
 
 function_argument:
     | INTERRO         { None }
@@ -128,4 +129,4 @@ decl_desc:
        { DDef (x, r, l, e) }
 
 program:
-    | l = list(decl) { l }
+    | l = list(decl); EOF { l }
