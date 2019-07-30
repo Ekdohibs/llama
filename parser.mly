@@ -49,13 +49,6 @@
 %token <string> LIDENT
 %token <string> UIDENT
 
-%nonassoc IF
-%nonassoc ELSE
-%nonassoc WHILE RETURN
-
-%left SEMI
-%nonassoc VAL
-
 %left EQEQ
 %left DOT
 
